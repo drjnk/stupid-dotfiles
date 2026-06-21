@@ -28,7 +28,7 @@ input {
     // Omitting settings disables them, or leaves them at their default values.
     // All commented-out settings here are examples, not defaults.
     touchpad {
-        // off
+		// off // toggleOffTouchpad
         tap
         // dwt
         // dwtp
@@ -38,7 +38,7 @@ input {
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
-        disabled-on-external-mouse
+        // disabled-on-external-mouse
     }
 
     mouse {
@@ -363,6 +363,7 @@ binds {
     // shows a list of important hotkeys.
     Mod+F1 hotkey-overlay-title="Run an Application: Firefox" { spawn "firefox"; }
     Mod+F2 hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
+	Mod+F5 hotkey-overlay-title="Block touchpad" { spawn-sh "/home/drjnk/.config/niri/touchpad-toggle"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
@@ -611,7 +612,7 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { spawn-sh "flameshot gui"; }
+    Print { spawn-sh "grim -g \"$(slurp)\" - | satty --filename -"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
@@ -640,6 +641,7 @@ window-rule {
     match app-id="firefox"
     match app-id="Code"
     match app-id="dev.zed.Zed"
+	match app-id=r#"libreoffice-calc"#
     open-maximized true
 }
 

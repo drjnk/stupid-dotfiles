@@ -363,6 +363,7 @@ binds {
     // shows a list of important hotkeys.
     Mod+F1 hotkey-overlay-title="Run an Application: Firefox" { spawn "firefox"; }
     Mod+F2 hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
+    Mod+F3 hotkey-overlay-title="Run an Application: Telegram" { spawn "Telegram"; }
 	Mod+F5 hotkey-overlay-title="Block touchpad" { spawn-sh "/home/drjnk/.config/niri/touchpad-toggle"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }

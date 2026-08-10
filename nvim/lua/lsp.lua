@@ -46,3 +46,19 @@ vim.lsp.config('pyright', {
     },
   },
 })
+vim.lsp.config('trivy', {
+  ---@type lspconfig.settings.trivy
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        preloadFileSize = 10000,
+        library = {
+          vim.env.VIMRUNTIME,
+        }
+      },
+    },
+  },
+})

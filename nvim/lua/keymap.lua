@@ -17,6 +17,9 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live gr
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
+vim.keymap.set('n', '<leader>r', '<Cmd>FlutterReload<CR>', { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>R', '<Cmd>FlutterRestart<CR>', { desc = 'Telescope help tags' })
+
 vim.keymap.set('n', '[g', function() 
 	vim.diagnostic.jump({count= -1,float = true}) 
 end)
@@ -49,6 +52,8 @@ local function execute_current_file()
         vim.cmd('!bash ' .. filename)
     elseif filetype == 'rust' then
         vim.cmd('!cargo run')
+	elseif filetype == 'dart' then
+		vim.cmd('FlutterRun')
     else
         print("Тип файла '" .. filetype .. "' не поддерживается для быстрого запуска")
     end

@@ -1,4 +1,4 @@
-local tab = 4
+local tab = 2
 
 vim.opt.nu = true
 vim.opt.relativenumber = true

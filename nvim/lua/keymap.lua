@@ -1,5 +1,3 @@
-vim.keymap.set('n', '<Tab>', '<Cmd>tabn<CR>')
-vim.keymap.set('n', '<S-Tab>', '<Cmd>tabp<CR>')
 vim.keymap.set('n', '<leader>q', '<Cmd>q<CR>')
 
 vim.keymap.set('n', '<Esc>', '<Cmd>nohl<CR>')
@@ -31,31 +29,46 @@ end)
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 
 -- Показать список всех ошибок в проекте (Quickfix list)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<space>eq', vim.diagnostic.setloclist)
+
+-- Терминал, вкладки, сплиты
+vim.keymap.set('n', '<C-t>', '<Cmd>vsplit | term<CR>', { noremap = true, silent = true })
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
+vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })
+vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]], { noremap = true, silent = true })
+vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-h>', [[<C-w>h]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-k>', [[<C-w>k]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-j>', [[<C-w>j]], { noremap = true, silent = true })
+vim.keymap.set('n', '<C-l>', [[<C-w>l]], { noremap = true, silent = true })
+vim.keymap.set('n', '<Tab>', '<Cmd>tabn<CR>')
+vim.keymap.set('n', '<S-Tab>', '<Cmd>tabp<CR>')
 
 local function execute_current_file()
     local filetype = vim.bo.filetype
     local filename = vim.fn.expand('%')
     local output = vim.fn.expand('%:r') -- Имя файла без расширения (для C++)
+	local cmd = function (arg) vim.cmd('vsplit | term ' .. arg) end
 
     if filetype == 'python' then
-        vim.cmd('!python3 ' .. filename)
+        cmd('python3 ' .. filename)
     elseif filetype == 'cpp' then
         -- Компилируем и сразу запускаем
-        vim.cmd('!g++ -O3 ' .. filename .. ' -o ' .. output .. ' && ./' .. output)
+        cmd('g++ -O3 ' .. filename .. ' -o ' .. output .. ' && ./' .. output)
     elseif filetype == 'c' then
-        vim.cmd('!gcc ' .. filename .. ' -o ' .. output .. ' && ./' .. output)
+        cmd('gcc ' .. filename .. ' -o ' .. output .. ' && ./' .. output)
     elseif filetype == 'lua' then
         vim.cmd('luafile %')
         print("Lua script executed.")
     elseif filetype == 'sh' then
-        vim.cmd('!bash ' .. filename)
+        cmd('bash ' .. filename)
     elseif filetype == 'rust' then
-        vim.cmd('!cargo run')
+        cmd('cargo run')
 	elseif filetype == 'dart' then
 		vim.cmd('FlutterRun')
     else
-        print("Тип файла '" .. filetype .. "' не поддерживается для быстрого запуска")
+		vim.cmd('vsplit | term')
     end
 end
 

@@ -1,0 +1,186 @@
+# Sway Config — Dracula Pro ✨
+
+# 🧩 Includes & Defaults
+include /etc/sway/config.d/*
+default_border pixel 3px
+font monolike 14px
+
+# ⌨️  Mod + Keybindings
+set $mod Mod4
+set $left b
+set $down n
+set $up p
+set $right f
+
+set $term xfce4-terminal
+set $menu exec /usr/bin/fuzzel
+set $gnome-schema org.gnome.desktop.interface
+
+# 🪟 Window Behavior Rules
+for_window [app_id="^launcher$"] floating enable, sticky enable
+for_window [app_id="^pavucontrol$"] floating enable, sticky enable
+for_window [app_id="blueman-manager"] floating enable, sticky enable
+for_window [app_id="galculator"] floating enable
+for_window [app_id="org.telegram.desktop"] floating enable, move absolute position center, move container to workspace number 9
+
+assign [app_id="firefox"] workspace number 1
+assign [app_id="libreoffice-writer"] workspace number 3
+assign [app_id="org.telegram.desktop"] workspace number 9
+
+gaps outer 10px
+gaps inner 10px
+
+# 🖼️  Display & Wallpaper
+output * bg /home/drjnk/.config/wallpapers/workspace.jpg center
+exec_always kanshi
+
+# 🌙 Idle Behavior
+exec swayidle -w \
+     timeout 600 'swaylock' \
+     timeout 605 'swaymsg "output * dpms off"' \
+     resume 'swaymsg "output * dpms on"' \
+     before-sleep 'swaylock' \
+     before-sleep 'playerctl pause'
+
+# ⌨️ Input Devices
+input "type:keyboard" {
+  xkb_layout "us,ru"
+  xkb_options "grp:alt_shift_toggle"
+}
+
+input "type:touchpad" {
+  tap enabled
+  natural_scroll enabled
+  events disabled_on_external_mouse
+}
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# 🔧 Workspace Management
+bindsym --to-code $mod+1 workspace number 1
+bindsym --to-code $mod+2 workspace number 2
+bindsym --to-code $mod+3 workspace number 3
+bindsym --to-code $mod+4 workspace number 4
+bindsym --to-code $mod+5 workspace number 5
+bindsym --to-code $mod+6 workspace number 6
+bindsym --to-code $mod+7 workspace number 7
+bindsym --to-code $mod+8 workspace number 8
+bindsym --to-code $mod+9 workspace number 9
+bindsym --to-code $mod+0 workspace number 10
+
+bindsym --to-code $mod+Shift+1 move container to workspace number 1, workspace number 1
+bindsym --to-code $mod+Shift+2 move container to workspace number 2, workspace number 2
+bindsym --to-code $mod+Shift+3 move container to workspace number 3, workspace number 3
+bindsym --to-code $mod+Shift+4 move container to workspace number 4, workspace number 4
+bindsym --to-code $mod+Shift+5 move container to workspace number 5, workspace number 5
+bindsym --to-code $mod+Shift+6 move container to workspace number 6, workspace number 6
+bindsym --to-code $mod+Shift+7 move container to workspace number 7, workspace number 7
+bindsym --to-code $mod+Shift+8 move container to workspace number 8, workspace number 8
+bindsym --to-code $mod+Shift+9 move container to workspace number 9, workspace number 9
+bindsym --to-code $mod+Shift+0 move container to workspace number 10, workspace number 10
+
+# 🧠 Tiling & Layout
+bindsym --to-code $mod+h splith
+bindsym --to-code $mod+v splitv
+bindsym --to-code $mod+s layout stacking
+bindsym --to-code $mod+w layout tabbed
+bindsym --to-code $mod+e layout toggle split
+bindsym --to-code $mod+Alt+f fullscreen
+bindsym --to-code $mod+Shift+space floating toggle
+bindsym --to-code $mod+space focus mode_toggle
+bindsym --to-code $mod+a focus parent
+
+# 💻 Window Management
+bindsym --to-code $mod+Return exec $term
+bindsym --to-code $mod+q kill
+bindsym --to-code $mod+d exec $menu
+floating_modifier $mod normal
+bindsym --to-code $mod+Shift+r reload
+
+bindsym --to-code $mod+Shift+e exec swaylock -i /home/drjnk/.config/wallpapers/backdrop.jpg
+bindsym --to-code $mod+Shift+q exec /usr/bin/wlogout
+
+# 🎯 Focus Navigation
+bindsym --to-code $mod+$left focus left
+bindsym --to-code $mod+$down focus down
+bindsym --to-code $mod+$up focus up
+bindsym --to-code $mod+$right focus right
+bindsym --to-code $mod+Left focus left
+bindsym --to-code $mod+Down focus down
+bindsym --to-code $mod+Up focus up
+bindsym --to-code $mod+Right focus right
+
+# 🔀 Move Windows
+bindsym --to-code $mod+Shift+$left move left
+bindsym --to-code $mod+Shift+$down move down
+bindsym --to-code $mod+Shift+$up move up
+bindsym --to-code $mod+Shift+$right move right
+bindsym --to-code $mod+Shift+Left move left
+bindsym --to-code $mod+Shift+Down move down
+bindsym --to-code $mod+Shift+Up move up
+bindsym --to-code $mod+Shift+Right move right
+
+# 📦 Scratchpad
+bindsym --to-code $mod+Shift+minus move scratchpad
+bindsym --to-code $mod+minus scratchpad show
+
+# 🎧 Media & Brightness
+bindsym --to-code XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym --to-code XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym --to-code XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --to-code XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --to-code XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --to-code XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym --to-code XF86AudioPlay exec playerctl play-pause
+bindsym --to-code XF86AudioNext exec playerctl next
+bindsym --to-code XF86AudioPrev exec playerctl previous
+bindsym --to-code XF86TouchpadToggle exec swaymsg input type:touchpad events toggle
+bindsym --to-code Print exec flameshot gui
+
+# ➕ Resize Mode
+mode "resize" {
+  bindsym --to-code $right resize shrink width 2px
+  bindsym --to-code $up resize shrink height 2px
+  bindsym --to-code $down resize grow height 2px
+  bindsym --to-code $left resize grow width 2px
+  bindsym --to-code Right resize shrink width 2px
+  bindsym --to-code Up resize grow height 2px
+  bindsym --to-code Down resize shrink height 2px
+  bindsym --to-code Left resize grow width 2px
+  bindsym --to-code Return mode "default"
+  bindsym --to-code Escape mode "default"
+}
+bindsym --to-code $mod+r mode "resize"
+
+# 🎨 Theme & Appearance
+client.focused          #9580ff #9580ff #22212c #9580ff #9580ff
+client.focused_inactive #9a9a9a #9a9a9a #22212c #9a9a9a #9a9a9a
+client.unfocused        #22212c #22212c #f8f8f2 #22212c #22212c
+client.urgent           #ff9580 #ff9580 #22212c #ff9580 #ff9580
+client.background       #f8f8f2
+
+bar {
+  swaybar_command waybar
+}
+
+exec_always {
+  gsettings set $gnome-schema gtk-theme 'Squared'
+  gsettings set $gnome-schema icon-theme 'Palette-Adwaita-Yellow-Dark'
+  gsettings set $gnome-schema cursor-theme 'MacOS-Pixel-Dark'
+}
+
+# 🛠️ Services & Extras
+
+# 🔔 Notifications
+bindsym --to-code $mod+Shift+i exec swaync-client -t -sw
+bindsym --to-code $mod+i exec swaync-client -t
+
+bindsym --to-code $mod+F1 exec firefox
+bindsym --to-code $mod+F2 exec thunar
+bindsym --to-code $mod+F3 exec Telegram
+bindsym --to-code $mod+F4 exec obsidian
+
+# Autostartup
+exec --no-startup-id dunst &
+exec --no-startup-id flameshot &
+exec --no-startup-id Telegram &

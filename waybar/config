@@ -9,11 +9,11 @@
     "/home/drjnk/.config/waybar/modules.jsonc"
   ],
   "modules-left": [
-    "niri/workspaces",
+    "sway/workspaces",
     "custom/media"
   ],
   "modules-center": [
-    "niri/window"
+    "sway/window"
   ],
   "modules-right": [
     "custom/updates",

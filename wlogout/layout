@@ -10,12 +10,12 @@
 }
 {
     "label" : "logout",
-    "action" : "niri msg action quit",
+    "action" : "swaymsg exit",
     "text" : "logout"
 }
 {
     "label" : "suspend",
-    "action" : "systemctl suspend",
+    "action" : "swaylock -i /home/drjnk/.config/wallpapers/backdrop.jpg & systemctl suspend",
     "text" : "suspend"
 }
 {

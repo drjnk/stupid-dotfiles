@@ -20,6 +20,11 @@
     "on-scroll-down": "playerctl next",
     "exec": "/home/drjnk/.config/waybar/modules/media-player.py 2> /dev/null",
   },
+  "sway/window": {
+    "icon": true,
+    "icon-size": 18,
+    "max-length": 70,
+  },
   "niri/window": {
     "icon": true,
     "icon-size": 18,

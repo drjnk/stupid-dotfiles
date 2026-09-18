@@ -26,7 +26,7 @@ vim.keymap.set('n', ']g', function()
 end)
 
 -- Показать текст ошибки в плавающем окне (если virtual_text выключен)
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<space>ef', vim.diagnostic.open_float)
 
 -- Показать список всех ошибок в проекте (Quickfix list)
 vim.keymap.set('n', '<space>eq', vim.diagnostic.setloclist)

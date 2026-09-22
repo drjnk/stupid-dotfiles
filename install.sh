@@ -17,5 +17,13 @@ sudo mv MacOS-Pixel-Cursors/MacOS-Pixel-Cursors/MacOS-Pixel-* /usr/share/icons/
 sudo mv Palette-* /usr/share/icons/
 sudo mv Squared /usr/share/themes
 cd minimal-grub-theme && sudo ./Intsall.sh
-clear
-echo "Installation done, update /usr/share/icons/default/index.theme manually with MacOS-Pixel-Dark"
+sudo cp index.theme /usr/share/icons/default/ -r
+sudo cp lightdm/* /etc/lightdm/ -r
+cp dunst/ ~/.config/ -r
+cp nvim/ ~/.config/ -r
+cp fuzzel/ ~/.config/ -r
+cp scripts/ ~/.config/ -r
+cp waybar/ ~/.config/ -r
+cp wlogout/ ~/.config/ -r
+cp sway/ ~/.config/ -r
+cp wallpapers/ ~/.config/ -r

@@ -31,8 +31,8 @@ gaps outer 10px
 gaps inner 10px
 
 # 🖼️  Display & Wallpaper
-output * bg /home/drjnk/.config/wallpapers/workspace.jpg center
-exec_always kanshi
+# output * bg /home/drjnk/.config/wallpapers/workspace.jpg center
+exec --no-startup-id swaybg -i /home/drjnk/.config/wallpapers/workspace.jpg -m fill &
 
 # 🌙 Idle Behavior
 exec swayidle -w \
@@ -165,7 +165,7 @@ bar {
 
 exec_always {
   gsettings set $gnome-schema gtk-theme 'Squared'
-  gsettings set $gnome-schema icon-theme 'Palette-Adwaita-Yellow-Dark'
+  gsettings set $gnome-schema icon-theme 'Palette-Adwaita-Dark'
   gsettings set $gnome-schema cursor-theme 'MacOS-Pixel-Dark'
 }
 

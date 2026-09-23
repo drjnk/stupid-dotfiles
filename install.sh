@@ -29,3 +29,4 @@ cp waybar/ ~/.config/ -r
 cp wlogout/ ~/.config/ -r
 cp sway/ ~/.config/ -r
 cp wallpapers/ ~/.config/ -r
+cp xfce4/ ~/.config/ -r

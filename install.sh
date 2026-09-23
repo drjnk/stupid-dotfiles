@@ -1,7 +1,7 @@
 sudo pacman -S figlet
 clear
 figlet "Dependencies & base packages" -f slant -c
-sudo pacman -Syuu git sway dunst fuzzel neovim waybar swaylock bat xfce4-terminal blueman pavucontrol telegram-desktop obsidian playerctl flameshot nwg-look nodejs npm swayidle lightdm-gtk-greeter thunar engrampa ttf-ubuntu-nerd ttf-ubuntu-mono-nerd ttf-adwaitamono-nerd
+sudo pacman -Syuu git sway dunst fuzzel neovim waybar swaylock bat xfce4-terminal blueman pavucontrol telegram-desktop obsidian playerctl flameshot nwg-look nodejs npm swayidle lightdm-gtk-greeter thunar engrampa ttf-ubuntu-nerd ttf-ubuntu-mono-nerd ttf-adwaitamono-nerd firefox wget
 figlet "Paru & AUR packages" -f slant -c
 sudo pacman -S --needed base-devel
 git clone https://aur.archlinux.org/paru.git
@@ -30,3 +30,10 @@ cp wlogout/ ~/.config/ -r
 cp sway/ ~/.config/ -r
 cp wallpapers/ ~/.config/ -r
 cp xfce4/ ~/.config/ -r
+figlet "Pentesting" -f slant -c
+sudo pacman -S binwalk john exiftool ghidra metasploit gobuster nmap netcat hydra
+paru burpsuite
+sudo mkdir /usr/share/wordlists
+curl -LO https://github.com/zacheller/rockyou/raw/refs/heads/master/rockyou.txt.tar.gz
+tar -xzf rockyou.txt.tar.gz
+sudo mv rockyou.txt /usr/share/wordlists/

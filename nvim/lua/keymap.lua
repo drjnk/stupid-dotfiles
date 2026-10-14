@@ -45,19 +45,20 @@ vim.keymap.set('n', '<C-l>', [[<C-w>l]], { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', '<Cmd>tabn<CR>')
 vim.keymap.set('n', '<S-Tab>', '<Cmd>tabp<CR>')
 
+-- Запуск
 local function execute_current_file()
     local filetype = vim.bo.filetype
     local filename = vim.fn.expand('%')
-    local output = vim.fn.expand('%:r') -- Имя файла без расширения (для C++)
+    local output = vim.fn.expand('%:r') -- Имя файла без расширения
+	local dir = vim.fn.expand("%p:h")
 	local cmd = function (arg) vim.cmd('vsplit | term ' .. arg) end
 
     if filetype == 'python' then
         cmd('python3 ' .. filename)
-    elseif filetype == 'cpp' then
-        -- Компилируем и сразу запускаем
-        cmd('g++ -O3 ' .. filename .. ' -o ' .. output .. ' && ./' .. output)
     elseif filetype == 'c' then
-        cmd('gcc ' .. filename .. ' -o ' .. output .. ' && ./' .. output)
+        cmd('gcc ' .. filename .. ' -Wall -o ' .. output .. ' && ./' .. output)
+	elseif filetype == 'cpp' then
+		cmd('g++ ' .. filename .. ' -Wall -o ' .. output .. ' && ./' .. output)
     elseif filetype == 'lua' then
         vim.cmd('luafile %')
         print("Lua script executed.")

@@ -62,3 +62,35 @@ vim.lsp.config('trivy', {
     },
   },
 })
+vim.lsp.config('clangd', {
+  ---@type lspconfig.settings.clangd
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        preloadFileSize = 10000,
+        library = {
+          vim.env.VIMRUNTIME,
+        }
+      },
+    },
+  },
+})
+vim.lsp.config('zls', {
+  ---@type lspconfig.settings.zls
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        preloadFileSize = 10000,
+        library = {
+          vim.env.VIMRUNTIME,
+        }
+      },
+    },
+  },
+})

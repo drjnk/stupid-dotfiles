@@ -36,10 +36,10 @@ exec --no-startup-id swaybg -i /home/drjnk/.config/wallpapers/workspace.jpg -m f
 
 # 🌙 Idle Behavior
 exec swayidle -w \
-     timeout 600 'swaylock' \
+     timeout 600 'swaylock -i /home/drjnk/.config/wallpapers/backdrop.jpg' \
      timeout 605 'swaymsg "output * dpms off"' \
      resume 'swaymsg "output * dpms on"' \
-     before-sleep 'swaylock' \
+     before-sleep 'swaylock -i /home/drjnk/.config/wallpapers/backdrop.jpg' \
      before-sleep 'playerctl pause'
 
 # ⌨️ Input Devices
@@ -86,8 +86,8 @@ bindsym --to-code $mod+s layout stacking
 bindsym --to-code $mod+w layout tabbed
 bindsym --to-code $mod+e layout toggle split
 bindsym --to-code $mod+Alt+f fullscreen
-bindsym --to-code $mod+Shift+space floating toggle
-bindsym --to-code $mod+space focus mode_toggle
+bindsym --to-code $mod+space floating toggle
+bindsym --to-code $mod+Shift+space focus mode_toggle
 bindsym --to-code $mod+a focus parent
 
 # 💻 Window Management
@@ -135,7 +135,7 @@ bindsym --to-code XF86AudioPlay exec playerctl play-pause
 bindsym --to-code XF86AudioNext exec playerctl next
 bindsym --to-code XF86AudioPrev exec playerctl previous
 bindsym --to-code XF86TouchpadToggle exec swaymsg input type:touchpad events toggle
-bindsym --to-code Print exec flameshot gui
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
 
 # ➕ Resize Mode
 mode "resize" {
@@ -182,5 +182,6 @@ bindsym --to-code $mod+F4 exec obsidian
 
 # Autostartup
 exec --no-startup-id dunst &
-exec --no-startup-id flameshot &
 exec --no-startup-id Telegram &
+
+exec --no-startup-id export _JAVA_AWT_WM_NONREPARENTING=1 &
